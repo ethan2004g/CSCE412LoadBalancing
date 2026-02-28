@@ -1,0 +1,13 @@
+# Example configuration file for the load balancer simulation.
+# You can edit these values to change behavior without recompiling.
+
+minTaskTime=5
+maxTaskTime=100
+requestArrivalProbability=0.4
+adjustCooldownCycles=50
+# IP prefix to block (firewall/DOS prevention); blocks all IPs starting with this prefix.
+# "10." blocks all 10.x.x.x addresses (~0.4% of random IPs = hundreds blocked per run).
+blockedIpPrefix=10.
+# Max queue slots per server. New requests beyond this cap are discarded (dropped).
+maxQueuePerServer=110
+
