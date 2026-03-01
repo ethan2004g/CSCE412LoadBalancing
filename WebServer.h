@@ -84,5 +84,6 @@ private:
     Request currentRequest_;
     int completedCount_;
     bool justCompleted_;
+    bool justAssigned_;
 };
 

@@ -6,7 +6,7 @@
 #include "WebServer.h"
 
 WebServer::WebServer(int id)
-    : id_(id), idle_(true), currentRequest_(), completedCount_(0), justCompleted_(false)
+    : id_(id), idle_(true), currentRequest_(), completedCount_(0), justCompleted_(false), justAssigned_(false)
 {
 }
 
@@ -20,12 +20,22 @@ void WebServer::assignRequest(const Request &request)
     currentRequest_ = request;
     idle_ = false;
     justCompleted_ = false;
+    justAssigned_ = true;
 }
 
 void WebServer::tick()
 {
     if (idle_)
     {
+        justCompleted_ = false;
+        return;
+    }
+
+    // Skip the first tick on the cycle a request is assigned so that a
+    // request with duration N completes exactly N cycles after it starts.
+    if (justAssigned_)
+    {
+        justAssigned_ = false;
         justCompleted_ = false;
         return;
     }
