@@ -119,6 +119,7 @@ void LoadBalancer::runSimulation(std::ostream &log)
         runOneCycle(log, true);
     }
     endingQueueSize_ = static_cast<int>(requestQueue_.size());
+    logCycle(log);
 }
 
 int LoadBalancer::getQueueSize() const
