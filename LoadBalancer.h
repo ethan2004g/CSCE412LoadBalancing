@@ -7,6 +7,7 @@
 
 #include <queue>
 #include <vector>
+#include <string>
 #include <iosfwd>
 
 #include "Request.h"
@@ -82,6 +83,16 @@ public:
      */
     void printSummary(std::ostream &out) const;
 
+    /**
+     * @brief Print a detailed per-request log showing start and end events.
+     *
+     * Each entry includes the cycle number, server ID, IP in, IP out, job type,
+     * and (for start events) the assigned duration in clock cycles.
+     *
+     * @param out Output stream where the request log will be written.
+     */
+    void printRequestLog(std::ostream &out) const;
+
 private:
     void generateRandomRequests();
     void assignRequestsToServers();
@@ -113,5 +124,8 @@ private:
 
     // Cached values for final summary
     int endingQueueSize_;
+
+    // Per-request start/end event log
+    std::vector<std::string> requestLog_;
 };
 

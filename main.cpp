@@ -122,6 +122,7 @@ int main()
         std::cout << "Running simulation (Switch mode)... this may take a moment.\n";
         sw.runSimulation(logStream);
         sw.printSummary(logStream);
+        sw.printRequestLog(logStream);
         if (useFileLog)
         {
             sw.printSummary(std::cout);
@@ -135,6 +136,7 @@ int main()
         std::cout << "Running simulation... this may take a moment.\n";
         balancer.runSimulation(logStream);
         balancer.printSummary(logStream);
+        balancer.printRequestLog(logStream);
         if (useFileLog)
         {
             balancer.printSummary(std::cout);

@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <random>
+#include <sstream>
+#include <iomanip>
 
 namespace
 {
@@ -153,6 +155,18 @@ void LoadBalancer::printSummary(std::ostream &out) const
     out << "========================================\n";
 }
 
+void LoadBalancer::printRequestLog(std::ostream &out) const
+{
+    out << "\n=== Per-Request Event Log ===\n";
+    out << "Format: [Cycle] START/END | Server | IP In | IP Out | Job Type | Duration (start only)\n";
+    out << "-------------------------------------------------------------------------------------\n";
+    for (const auto &entry : requestLog_)
+    {
+        out << entry << "\n";
+    }
+    out << "=== End Per-Request Event Log ===\n";
+}
+
 void LoadBalancer::generateRandomRequests()
 {
     // Decide probabilistically whether to generate a new request this cycle.
@@ -187,6 +201,16 @@ void LoadBalancer::assignRequestsToServers()
             Request r = requestQueue_.front();
             requestQueue_.pop();
             server.assignRequest(r);
+
+            std::ostringstream entry;
+            entry << "[Cycle " << std::setw(6) << currentCycle_ << "] "
+                  << "REQUEST START | Server " << std::setw(3) << server.getId()
+                  << " | IP In: "  << std::setw(15) << std::left << r.ipIn
+                  << " | IP Out: " << std::setw(15) << std::left << r.ipOut
+                  << " | Job: " << r.jobType
+                  << " | Duration: " << r.timeRemaining << " cycles"
+                  << std::right;
+            requestLog_.push_back(entry.str());
         }
     }
 }
@@ -199,6 +223,17 @@ void LoadBalancer::processServers()
         if (server.hasJustCompleted())
         {
             ++totalCompleted_;
+            const Request &req = server.getCurrentRequest();
+
+            std::ostringstream entry;
+            entry << "[Cycle " << std::setw(6) << currentCycle_ << "] "
+                  << "REQUEST END   | Server " << std::setw(3) << server.getId()
+                  << " | IP In: "  << std::setw(15) << std::left << req.ipIn
+                  << " | IP Out: " << std::setw(15) << std::left << req.ipOut
+                  << " | Job: " << req.jobType
+                  << std::right;
+            requestLog_.push_back(entry.str());
+
             server.clearJustCompleted();
         }
     }

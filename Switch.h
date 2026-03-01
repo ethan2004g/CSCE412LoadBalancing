@@ -61,6 +61,13 @@ public:
      */
     void printSummary(std::ostream &out) const;
 
+    /**
+     * @brief Print per-request event logs for both the streaming and processing load balancers.
+     *
+     * @param out Output stream for the request log.
+     */
+    void printRequestLog(std::ostream &out) const;
+
 private:
     void generateAndRouteRequests();
 

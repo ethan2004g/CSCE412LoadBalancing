@@ -71,6 +71,13 @@ public:
      */
     void clearJustCompleted();
 
+    /**
+     * @brief Get the request currently assigned to (or last completed by) this server.
+     *
+     * @return Const reference to the current request.
+     */
+    const Request &getCurrentRequest() const;
+
 private:
     int id_;
     bool idle_;

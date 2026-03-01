@@ -99,3 +99,16 @@ void Switch::printSummary(std::ostream &out) const
 
     out << "\n========== End Switch Summary ==========\n";
 }
+
+void Switch::printRequestLog(std::ostream &out) const
+{
+    out << "\n========== Switch – Per-Request Event Log ==========\n";
+
+    out << "\n--- Streaming Load Balancer ---\n";
+    streamingLB_.printRequestLog(out);
+
+    out << "\n--- Processing Load Balancer ---\n";
+    processingLB_.printRequestLog(out);
+
+    out << "\n========== End Switch Per-Request Event Log ==========\n";
+}

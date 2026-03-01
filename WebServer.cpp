@@ -67,3 +67,8 @@ void WebServer::clearJustCompleted()
     justCompleted_ = false;
 }
 
+const Request &WebServer::getCurrentRequest() const
+{
+    return currentRequest_;
+}
+

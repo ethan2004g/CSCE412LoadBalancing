@@ -1,0 +1,459 @@
+CSCE 412 Project 3 - Load Balancer Log
+Mode: Bonus (Switch: Streaming + Processing LBs)
+Initial servers (per pool in Switch mode): 10
+Total cycles: 10000
+Task time range: [5, 100]
+Request arrival probability: 0.4
+Adjust cooldown cycles: 50
+
+Starting total queue size (both pools): 1989
+
+Switch mode: routing Streaming (S) and Processing (P) to separate load balancers.
+
+Cycle 0: Queue=993 [target 500-800, cap=1100] (OVERLOADED), Servers=10 (active=10 idle=0), Completed=0, Blocked=6, Discarded=0
+Cycle 0: Queue=976 [target 500-800, cap=1100] (OVERLOADED), Servers=10 (active=10 idle=0), Completed=0, Blocked=5, Discarded=0
+[Cycle 50] SCALE UP: queue=1001 > upper threshold 800 (80 x 10) => servers: 10 -> 11
+Cycle 50: Queue=1001 [target 550-880, cap=1100] (OVERLOADED), Servers=11 (active=10 idle=1), Completed=7, Blocked=6, Discarded=0
+[Cycle 50] SCALE UP: queue=972 > upper threshold 800 (80 x 10) => servers: 10 -> 11
+Cycle 50: Queue=972 [target 550-880, cap=1100] (OVERLOADED), Servers=11 (active=10 idle=1), Completed=7, Blocked=5, Discarded=0
+[Cycle 100] SCALE UP: queue=1002 > upper threshold 880 (80 x 11) => servers: 11 -> 12
+Cycle 100: Queue=1002 [target 600-960, cap=1100] (OVERLOADED), Servers=12 (active=11 idle=1), Completed=17, Blocked=6, Discarded=0
+[Cycle 100] SCALE UP: queue=969 > upper threshold 880 (80 x 11) => servers: 11 -> 12
+Cycle 100: Queue=969 [target 600-960, cap=1100] (OVERLOADED), Servers=12 (active=11 idle=1), Completed=18, Blocked=5, Discarded=0
+[Cycle 150] SCALE UP: queue=993 > upper threshold 960 (80 x 12) => servers: 12 -> 13
+Cycle 150: Queue=993 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=11 idle=2), Completed=32, Blocked=6, Discarded=0
+[Cycle 150] SCALE UP: queue=965 > upper threshold 960 (80 x 12) => servers: 12 -> 13
+Cycle 150: Queue=965 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=11 idle=2), Completed=31, Blocked=5, Discarded=0
+Cycle 200: Queue=988 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=42, Blocked=6, Discarded=0
+Cycle 200: Queue=961 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=41, Blocked=5, Discarded=0
+Cycle 250: Queue=987 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=52, Blocked=6, Discarded=0
+Cycle 250: Queue=957 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=54, Blocked=5, Discarded=0
+Cycle 300: Queue=977 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=65, Blocked=6, Discarded=0
+Cycle 300: Queue=960 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=64, Blocked=5, Discarded=0
+Cycle 350: Queue=978 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=79, Blocked=6, Discarded=0
+Cycle 350: Queue=953 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=75, Blocked=5, Discarded=0
+Cycle 400: Queue=972 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=90, Blocked=6, Discarded=0
+Cycle 400: Queue=952 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=87, Blocked=5, Discarded=0
+Cycle 450: Queue=971 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=106, Blocked=6, Discarded=0
+Cycle 450: Queue=943 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=106, Blocked=5, Discarded=0
+Cycle 500: Queue=967 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=117, Blocked=6, Discarded=0
+Cycle 500: Queue=947 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=113, Blocked=5, Discarded=0
+Cycle 550: Queue=961 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=133, Blocked=6, Discarded=0
+Cycle 550: Queue=943 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=131, Blocked=5, Discarded=0
+Cycle 600: Queue=955 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=147, Blocked=6, Discarded=0
+Cycle 600: Queue=940 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=144, Blocked=5, Discarded=0
+Cycle 650: Queue=954 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=157, Blocked=6, Discarded=0
+Cycle 650: Queue=940 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=154, Blocked=5, Discarded=0
+Cycle 700: Queue=958 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=168, Blocked=6, Discarded=0
+Cycle 700: Queue=939 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=166, Blocked=5, Discarded=0
+Cycle 750: Queue=956 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=183, Blocked=6, Discarded=0
+Cycle 750: Queue=936 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=179, Blocked=5, Discarded=0
+Cycle 800: Queue=952 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=196, Blocked=6, Discarded=0
+Cycle 800: Queue=934 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=191, Blocked=5, Discarded=0
+Cycle 850: Queue=951 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=11 idle=2), Completed=210, Blocked=6, Discarded=0
+Cycle 850: Queue=931 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=202, Blocked=5, Discarded=0
+Cycle 900: Queue=950 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=220, Blocked=6, Discarded=0
+Cycle 900: Queue=934 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=216, Blocked=5, Discarded=0
+Cycle 950: Queue=945 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=239, Blocked=6, Discarded=0
+Cycle 950: Queue=936 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=226, Blocked=5, Discarded=0
+Cycle 1000: Queue=948 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=11 idle=2), Completed=249, Blocked=6, Discarded=0
+Cycle 1000: Queue=928 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=239, Blocked=5, Discarded=0
+Cycle 1050: Queue=944 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=266, Blocked=6, Discarded=0
+Cycle 1050: Queue=926 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=251, Blocked=5, Discarded=0
+Cycle 1100: Queue=950 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=275, Blocked=6, Discarded=0
+Cycle 1100: Queue=923 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=263, Blocked=5, Discarded=0
+Cycle 1150: Queue=937 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=295, Blocked=6, Discarded=0
+Cycle 1150: Queue=921 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=274, Blocked=5, Discarded=0
+Cycle 1200: Queue=939 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=305, Blocked=6, Discarded=0
+Cycle 1200: Queue=918 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=285, Blocked=5, Discarded=0
+Cycle 1250: Queue=934 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=321, Blocked=6, Discarded=0
+Cycle 1250: Queue=919 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=296, Blocked=5, Discarded=0
+Cycle 1300: Queue=926 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=335, Blocked=6, Discarded=0
+Cycle 1300: Queue=909 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=310, Blocked=5, Discarded=0
+Cycle 1350: Queue=929 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=348, Blocked=6, Discarded=0
+Cycle 1350: Queue=907 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=321, Blocked=5, Discarded=0
+Cycle 1400: Queue=927 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=361, Blocked=6, Discarded=0
+Cycle 1400: Queue=899 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=336, Blocked=5, Discarded=0
+Cycle 1450: Queue=927 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=370, Blocked=6, Discarded=0
+Cycle 1450: Queue=894 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=351, Blocked=5, Discarded=0
+Cycle 1500: Queue=926 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=379, Blocked=6, Discarded=0
+Cycle 1500: Queue=890 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=360, Blocked=5, Discarded=0
+Cycle 1550: Queue=925 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=392, Blocked=6, Discarded=0
+Cycle 1550: Queue=882 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=378, Blocked=5, Discarded=0
+Cycle 1600: Queue=917 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=408, Blocked=6, Discarded=0
+Cycle 1600: Queue=882 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=386, Blocked=5, Discarded=0
+Cycle 1650: Queue=919 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=419, Blocked=6, Discarded=0
+Cycle 1650: Queue=875 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=398, Blocked=5, Discarded=0
+Cycle 1700: Queue=922 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=430, Blocked=6, Discarded=0
+Cycle 1700: Queue=868 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=413, Blocked=5, Discarded=0
+Cycle 1750: Queue=916 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=444, Blocked=6, Discarded=0
+Cycle 1750: Queue=861 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=428, Blocked=5, Discarded=0
+Cycle 1800: Queue=912 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=456, Blocked=6, Discarded=0
+Cycle 1800: Queue=861 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=440, Blocked=5, Discarded=0
+Cycle 1850: Queue=902 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=470, Blocked=6, Discarded=0
+Cycle 1850: Queue=863 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=451, Blocked=5, Discarded=0
+Cycle 1900: Queue=899 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=486, Blocked=6, Discarded=0
+Cycle 1900: Queue=856 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=466, Blocked=5, Discarded=0
+Cycle 1950: Queue=898 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=500, Blocked=6, Discarded=0
+Cycle 1950: Queue=852 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=480, Blocked=5, Discarded=0
+Cycle 2000: Queue=894 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=515, Blocked=6, Discarded=0
+Cycle 2000: Queue=855 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=491, Blocked=5, Discarded=0
+Cycle 2050: Queue=887 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=525, Blocked=6, Discarded=0
+Cycle 2050: Queue=850 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=503, Blocked=5, Discarded=0
+Cycle 2100: Queue=891 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=532, Blocked=6, Discarded=0
+Cycle 2100: Queue=851 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=513, Blocked=5, Discarded=0
+Cycle 2150: Queue=889 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=544, Blocked=6, Discarded=0
+Cycle 2150: Queue=845 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=525, Blocked=5, Discarded=0
+Cycle 2200: Queue=887 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=556, Blocked=6, Discarded=0
+Cycle 2200: Queue=849 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=533, Blocked=5, Discarded=0
+Cycle 2250: Queue=890 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=567, Blocked=6, Discarded=0
+Cycle 2250: Queue=844 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=548, Blocked=5, Discarded=0
+Cycle 2300: Queue=888 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=578, Blocked=6, Discarded=0
+Cycle 2300: Queue=843 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=557, Blocked=5, Discarded=0
+Cycle 2350: Queue=887 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=589, Blocked=6, Discarded=0
+Cycle 2350: Queue=839 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=575, Blocked=5, Discarded=0
+Cycle 2400: Queue=886 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=602, Blocked=6, Discarded=0
+Cycle 2400: Queue=834 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=587, Blocked=5, Discarded=0
+Cycle 2450: Queue=881 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=615, Blocked=6, Discarded=0
+Cycle 2450: Queue=831 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=598, Blocked=5, Discarded=0
+Cycle 2500: Queue=879 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=627, Blocked=6, Discarded=0
+Cycle 2500: Queue=830 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=605, Blocked=5, Discarded=0
+Cycle 2550: Queue=872 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=642, Blocked=6, Discarded=0
+Cycle 2550: Queue=827 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=618, Blocked=5, Discarded=0
+Cycle 2600: Queue=874 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=654, Blocked=6, Discarded=0
+Cycle 2600: Queue=820 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=632, Blocked=5, Discarded=0
+Cycle 2650: Queue=872 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=667, Blocked=6, Discarded=0
+Cycle 2650: Queue=815 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=645, Blocked=5, Discarded=0
+Cycle 2700: Queue=868 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=681, Blocked=6, Discarded=0
+Cycle 2700: Queue=812 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=662, Blocked=5, Discarded=0
+Cycle 2750: Queue=866 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=692, Blocked=6, Discarded=0
+Cycle 2750: Queue=809 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=675, Blocked=5, Discarded=0
+Cycle 2800: Queue=863 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=706, Blocked=6, Discarded=0
+Cycle 2800: Queue=812 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=686, Blocked=5, Discarded=0
+Cycle 2850: Queue=859 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=721, Blocked=6, Discarded=0
+Cycle 2850: Queue=808 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=699, Blocked=5, Discarded=0
+Cycle 2900: Queue=852 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=733, Blocked=6, Discarded=0
+Cycle 2900: Queue=806 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=713, Blocked=5, Discarded=0
+Cycle 2950: Queue=847 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=747, Blocked=6, Discarded=0
+Cycle 2950: Queue=796 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=732, Blocked=5, Discarded=0
+Cycle 3000: Queue=849 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=759, Blocked=6, Discarded=0
+Cycle 3000: Queue=798 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=743, Blocked=5, Discarded=0
+Cycle 3050: Queue=844 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=773, Blocked=6, Discarded=0
+Cycle 3050: Queue=794 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=754, Blocked=5, Discarded=0
+Cycle 3100: Queue=835 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=786, Blocked=6, Discarded=0
+Cycle 3100: Queue=790 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=765, Blocked=5, Discarded=0
+Cycle 3150: Queue=833 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=800, Blocked=6, Discarded=0
+Cycle 3150: Queue=792 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=776, Blocked=5, Discarded=0
+Cycle 3200: Queue=834 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=811, Blocked=6, Discarded=0
+Cycle 3200: Queue=790 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=787, Blocked=5, Discarded=0
+Cycle 3250: Queue=827 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=827, Blocked=6, Discarded=0
+Cycle 3250: Queue=790 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=800, Blocked=5, Discarded=0
+Cycle 3300: Queue=830 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=838, Blocked=6, Discarded=0
+Cycle 3300: Queue=784 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=814, Blocked=5, Discarded=0
+Cycle 3350: Queue=823 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=854, Blocked=6, Discarded=0
+Cycle 3350: Queue=788 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=825, Blocked=5, Discarded=0
+Cycle 3400: Queue=817 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=866, Blocked=6, Discarded=0
+Cycle 3400: Queue=789 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=834, Blocked=5, Discarded=0
+Cycle 3450: Queue=814 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=879, Blocked=6, Discarded=0
+Cycle 3450: Queue=782 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=848, Blocked=5, Discarded=0
+Cycle 3500: Queue=811 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=890, Blocked=6, Discarded=0
+Cycle 3500: Queue=783 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=855, Blocked=5, Discarded=0
+Cycle 3550: Queue=809 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=902, Blocked=6, Discarded=0
+Cycle 3550: Queue=784 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=865, Blocked=5, Discarded=0
+Cycle 3600: Queue=807 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=911, Blocked=6, Discarded=0
+Cycle 3600: Queue=782 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=876, Blocked=5, Discarded=0
+Cycle 3650: Queue=805 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=922, Blocked=6, Discarded=0
+Cycle 3650: Queue=785 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=883, Blocked=5, Discarded=0
+Cycle 3700: Queue=801 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=936, Blocked=6, Discarded=0
+Cycle 3700: Queue=784 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=900, Blocked=5, Discarded=0
+Cycle 3750: Queue=804 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=946, Blocked=6, Discarded=0
+Cycle 3750: Queue=780 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=909, Blocked=5, Discarded=0
+Cycle 3800: Queue=803 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=960, Blocked=6, Discarded=0
+Cycle 3800: Queue=778 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=920, Blocked=5, Discarded=0
+Cycle 3850: Queue=798 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=974, Blocked=6, Discarded=0
+Cycle 3850: Queue=775 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=934, Blocked=5, Discarded=0
+Cycle 3900: Queue=797 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=986, Blocked=6, Discarded=0
+Cycle 3900: Queue=773 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=950, Blocked=5, Discarded=0
+Cycle 3950: Queue=798 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1001, Blocked=6, Discarded=0
+Cycle 3950: Queue=761 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=968, Blocked=5, Discarded=0
+Cycle 4000: Queue=798 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1013, Blocked=6, Discarded=0
+Cycle 4000: Queue=760 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=978, Blocked=5, Discarded=0
+Cycle 4050: Queue=793 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1028, Blocked=6, Discarded=0
+Cycle 4050: Queue=761 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=989, Blocked=5, Discarded=0
+Cycle 4100: Queue=791 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1040, Blocked=6, Discarded=0
+Cycle 4100: Queue=751 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1005, Blocked=5, Discarded=0
+Cycle 4150: Queue=787 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1050, Blocked=6, Discarded=0
+Cycle 4150: Queue=745 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1022, Blocked=5, Discarded=0
+Cycle 4200: Queue=787 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1060, Blocked=6, Discarded=0
+Cycle 4200: Queue=743 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1033, Blocked=5, Discarded=0
+Cycle 4250: Queue=781 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1076, Blocked=6, Discarded=0
+Cycle 4250: Queue=737 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1046, Blocked=5, Discarded=0
+Cycle 4300: Queue=779 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1083, Blocked=6, Discarded=0
+Cycle 4300: Queue=736 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1057, Blocked=5, Discarded=0
+Cycle 4350: Queue=776 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1095, Blocked=6, Discarded=0
+Cycle 4350: Queue=738 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1070, Blocked=5, Discarded=0
+Cycle 4400: Queue=772 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1112, Blocked=6, Discarded=0
+Cycle 4400: Queue=737 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1084, Blocked=5, Discarded=0
+Cycle 4450: Queue=771 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1122, Blocked=6, Discarded=0
+Cycle 4450: Queue=736 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1098, Blocked=5, Discarded=0
+Cycle 4500: Queue=767 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1137, Blocked=6, Discarded=0
+Cycle 4500: Queue=732 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1109, Blocked=5, Discarded=0
+Cycle 4550: Queue=767 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1147, Blocked=6, Discarded=0
+Cycle 4550: Queue=731 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1119, Blocked=5, Discarded=0
+Cycle 4600: Queue=770 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1158, Blocked=6, Discarded=0
+Cycle 4600: Queue=725 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1134, Blocked=5, Discarded=0
+Cycle 4650: Queue=780 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1165, Blocked=6, Discarded=0
+Cycle 4650: Queue=721 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1147, Blocked=5, Discarded=0
+Cycle 4700: Queue=779 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1180, Blocked=6, Discarded=0
+Cycle 4700: Queue=715 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1159, Blocked=5, Discarded=0
+Cycle 4750: Queue=783 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1193, Blocked=6, Discarded=0
+Cycle 4750: Queue=710 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1173, Blocked=5, Discarded=0
+Cycle 4800: Queue=773 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1216, Blocked=6, Discarded=0
+Cycle 4800: Queue=710 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1182, Blocked=5, Discarded=0
+Cycle 4850: Queue=770 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1229, Blocked=6, Discarded=0
+Cycle 4850: Queue=710 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1195, Blocked=5, Discarded=0
+Cycle 4900: Queue=767 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1242, Blocked=6, Discarded=0
+Cycle 4900: Queue=709 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1205, Blocked=5, Discarded=0
+Cycle 4950: Queue=765 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1258, Blocked=6, Discarded=0
+Cycle 4950: Queue=696 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1222, Blocked=5, Discarded=0
+Cycle 5000: Queue=760 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1271, Blocked=7, Discarded=0
+Cycle 5000: Queue=697 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1234, Blocked=5, Discarded=0
+Cycle 5050: Queue=764 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1279, Blocked=7, Discarded=0
+Cycle 5050: Queue=689 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1251, Blocked=5, Discarded=0
+Cycle 5100: Queue=762 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1291, Blocked=7, Discarded=0
+Cycle 5100: Queue=691 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1260, Blocked=5, Discarded=0
+Cycle 5150: Queue=754 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1306, Blocked=7, Discarded=0
+Cycle 5150: Queue=688 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1274, Blocked=5, Discarded=0
+Cycle 5200: Queue=747 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1321, Blocked=8, Discarded=0
+Cycle 5200: Queue=687 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1284, Blocked=5, Discarded=0
+Cycle 5250: Queue=745 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1331, Blocked=8, Discarded=0
+Cycle 5250: Queue=689 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1297, Blocked=5, Discarded=0
+Cycle 5300: Queue=738 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1346, Blocked=8, Discarded=0
+Cycle 5300: Queue=687 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1308, Blocked=5, Discarded=0
+Cycle 5350: Queue=739 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1357, Blocked=8, Discarded=0
+Cycle 5350: Queue=678 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1323, Blocked=5, Discarded=0
+Cycle 5400: Queue=740 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1367, Blocked=8, Discarded=0
+Cycle 5400: Queue=679 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1334, Blocked=5, Discarded=0
+Cycle 5450: Queue=740 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1379, Blocked=8, Discarded=0
+Cycle 5450: Queue=683 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1346, Blocked=5, Discarded=0
+Cycle 5500: Queue=745 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1389, Blocked=8, Discarded=0
+Cycle 5500: Queue=683 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1356, Blocked=5, Discarded=0
+Cycle 5550: Queue=736 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1406, Blocked=8, Discarded=0
+Cycle 5550: Queue=679 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1369, Blocked=5, Discarded=0
+Cycle 5600: Queue=740 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1415, Blocked=8, Discarded=0
+Cycle 5600: Queue=677 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1377, Blocked=5, Discarded=0
+Cycle 5650: Queue=741 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1426, Blocked=8, Discarded=0
+Cycle 5650: Queue=672 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1390, Blocked=5, Discarded=0
+Cycle 5700: Queue=740 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1437, Blocked=8, Discarded=0
+Cycle 5700: Queue=667 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1403, Blocked=5, Discarded=0
+Cycle 5750: Queue=744 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1449, Blocked=8, Discarded=0
+Cycle 5750: Queue=661 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1415, Blocked=5, Discarded=0
+Cycle 5800: Queue=742 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1457, Blocked=8, Discarded=0
+Cycle 5800: Queue=660 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1427, Blocked=5, Discarded=0
+Cycle 5850: Queue=739 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1470, Blocked=8, Discarded=0
+Cycle 5850: Queue=656 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1442, Blocked=5, Discarded=0
+Cycle 5900: Queue=738 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1484, Blocked=8, Discarded=0
+Cycle 5900: Queue=650 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1455, Blocked=5, Discarded=0
+Cycle 5950: Queue=736 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1496, Blocked=8, Discarded=0
+Cycle 5950: Queue=651 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1466, Blocked=5, Discarded=0
+Cycle 6000: Queue=732 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1510, Blocked=8, Discarded=0
+Cycle 6000: Queue=655 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1476, Blocked=5, Discarded=0
+Cycle 6050: Queue=728 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1522, Blocked=8, Discarded=0
+Cycle 6050: Queue=650 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1491, Blocked=5, Discarded=0
+[Cycle 6068] SCALE DOWN: queue=649 < lower threshold 650 (50 x 13) => servers: 13 -> 12
+Cycle 6100: Queue=718 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1540, Blocked=8, Discarded=0
+Cycle 6100: Queue=650 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1499, Blocked=5, Discarded=0
+Cycle 6150: Queue=716 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1552, Blocked=8, Discarded=0
+Cycle 6150: Queue=646 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1514, Blocked=6, Discarded=0
+Cycle 6200: Queue=714 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1568, Blocked=8, Discarded=0
+Cycle 6200: Queue=644 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1527, Blocked=6, Discarded=0
+Cycle 6250: Queue=708 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1582, Blocked=8, Discarded=0
+Cycle 6250: Queue=642 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=11 idle=1), Completed=1540, Blocked=6, Discarded=0
+Cycle 6300: Queue=705 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1597, Blocked=8, Discarded=0
+Cycle 6300: Queue=643 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1553, Blocked=6, Discarded=0
+Cycle 6350: Queue=700 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1610, Blocked=8, Discarded=0
+Cycle 6350: Queue=638 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1563, Blocked=6, Discarded=0
+Cycle 6400: Queue=699 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1621, Blocked=8, Discarded=0
+Cycle 6400: Queue=638 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1574, Blocked=6, Discarded=0
+Cycle 6450: Queue=698 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1634, Blocked=8, Discarded=0
+Cycle 6450: Queue=639 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1585, Blocked=6, Discarded=0
+Cycle 6500: Queue=697 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1647, Blocked=8, Discarded=0
+Cycle 6500: Queue=638 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1597, Blocked=6, Discarded=0
+Cycle 6550: Queue=692 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1661, Blocked=8, Discarded=0
+Cycle 6550: Queue=639 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1606, Blocked=6, Discarded=0
+Cycle 6600: Queue=693 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1671, Blocked=8, Discarded=0
+Cycle 6600: Queue=634 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1619, Blocked=6, Discarded=0
+Cycle 6650: Queue=686 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1686, Blocked=9, Discarded=0
+Cycle 6650: Queue=629 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1630, Blocked=6, Discarded=0
+Cycle 6700: Queue=689 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1695, Blocked=9, Discarded=0
+Cycle 6700: Queue=632 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1641, Blocked=8, Discarded=0
+Cycle 6750: Queue=683 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1711, Blocked=9, Discarded=0
+Cycle 6750: Queue=633 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1651, Blocked=8, Discarded=0
+Cycle 6800: Queue=687 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1718, Blocked=9, Discarded=0
+Cycle 6800: Queue=624 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=11 idle=1), Completed=1663, Blocked=8, Discarded=0
+Cycle 6850: Queue=678 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1734, Blocked=9, Discarded=0
+Cycle 6850: Queue=625 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1675, Blocked=8, Discarded=0
+Cycle 6900: Queue=677 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1746, Blocked=9, Discarded=0
+Cycle 6900: Queue=622 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1689, Blocked=8, Discarded=0
+Cycle 6950: Queue=672 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1756, Blocked=9, Discarded=0
+Cycle 6950: Queue=621 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1700, Blocked=8, Discarded=0
+Cycle 7000: Queue=666 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1771, Blocked=9, Discarded=0
+Cycle 7000: Queue=619 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1711, Blocked=8, Discarded=0
+Cycle 7050: Queue=662 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1781, Blocked=9, Discarded=0
+Cycle 7050: Queue=619 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1720, Blocked=8, Discarded=0
+Cycle 7100: Queue=658 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1791, Blocked=9, Discarded=0
+Cycle 7100: Queue=617 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=11 idle=1), Completed=1732, Blocked=8, Discarded=0
+Cycle 7150: Queue=654 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1802, Blocked=9, Discarded=0
+Cycle 7150: Queue=620 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=11 idle=1), Completed=1741, Blocked=8, Discarded=0
+Cycle 7200: Queue=653 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=13 idle=0), Completed=1813, Blocked=9, Discarded=0
+Cycle 7200: Queue=618 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=10 idle=2), Completed=1752, Blocked=8, Discarded=0
+Cycle 7250: Queue=652 [target 650-1040, cap=1100] (IN RANGE), Servers=13 (active=12 idle=1), Completed=1826, Blocked=9, Discarded=0
+Cycle 7250: Queue=617 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=11 idle=1), Completed=1760, Blocked=8, Discarded=0
+[Cycle 7289] SCALE DOWN: queue=649 < lower threshold 650 (50 x 13) => servers: 13 -> 12
+Cycle 7300: Queue=648 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=11 idle=1), Completed=1837, Blocked=9, Discarded=0
+Cycle 7300: Queue=619 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1771, Blocked=8, Discarded=0
+Cycle 7350: Queue=645 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1848, Blocked=9, Discarded=0
+Cycle 7350: Queue=616 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1781, Blocked=8, Discarded=0
+Cycle 7400: Queue=642 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1858, Blocked=10, Discarded=0
+Cycle 7400: Queue=617 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1789, Blocked=8, Discarded=0
+Cycle 7450: Queue=641 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1871, Blocked=10, Discarded=0
+Cycle 7450: Queue=614 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1804, Blocked=8, Discarded=0
+Cycle 7500: Queue=635 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=11 idle=1), Completed=1884, Blocked=10, Discarded=0
+Cycle 7500: Queue=616 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1815, Blocked=8, Discarded=0
+Cycle 7550: Queue=628 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1896, Blocked=10, Discarded=0
+Cycle 7550: Queue=616 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=10 idle=2), Completed=1827, Blocked=8, Discarded=0
+Cycle 7600: Queue=628 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1904, Blocked=10, Discarded=0
+Cycle 7600: Queue=614 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1838, Blocked=8, Discarded=0
+Cycle 7650: Queue=625 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1917, Blocked=10, Discarded=0
+Cycle 7650: Queue=611 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1848, Blocked=8, Discarded=0
+Cycle 7700: Queue=624 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1928, Blocked=10, Discarded=0
+Cycle 7700: Queue=609 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1859, Blocked=8, Discarded=0
+Cycle 7750: Queue=621 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1938, Blocked=11, Discarded=0
+Cycle 7750: Queue=607 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1870, Blocked=8, Discarded=0
+Cycle 7800: Queue=619 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=11 idle=1), Completed=1952, Blocked=11, Discarded=0
+Cycle 7800: Queue=606 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1881, Blocked=8, Discarded=0
+Cycle 7850: Queue=616 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=11 idle=1), Completed=1964, Blocked=11, Discarded=0
+Cycle 7850: Queue=604 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1891, Blocked=8, Discarded=0
+Cycle 7900: Queue=620 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1972, Blocked=11, Discarded=0
+Cycle 7900: Queue=604 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1903, Blocked=8, Discarded=0
+[Cycle 7941] SCALE DOWN: queue=598 < lower threshold 600 (50 x 12) => servers: 12 -> 11
+Cycle 7950: Queue=623 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1983, Blocked=11, Discarded=0
+Cycle 7950: Queue=598 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=1917, Blocked=8, Discarded=0
+Cycle 8000: Queue=621 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=1993, Blocked=11, Discarded=0
+Cycle 8000: Queue=601 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=1925, Blocked=8, Discarded=0
+Cycle 8050: Queue=618 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=2004, Blocked=11, Discarded=0
+Cycle 8050: Queue=593 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=1940, Blocked=8, Discarded=0
+Cycle 8100: Queue=621 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=2015, Blocked=11, Discarded=0
+Cycle 8100: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=1950, Blocked=8, Discarded=0
+Cycle 8150: Queue=621 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=2024, Blocked=11, Discarded=0
+Cycle 8150: Queue=589 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=1958, Blocked=8, Discarded=0
+Cycle 8200: Queue=613 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=2037, Blocked=11, Discarded=0
+Cycle 8200: Queue=585 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=1971, Blocked=8, Discarded=0
+Cycle 8250: Queue=608 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=2050, Blocked=11, Discarded=0
+Cycle 8250: Queue=584 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=1981, Blocked=8, Discarded=0
+Cycle 8300: Queue=604 [target 600-960, cap=1100] (IN RANGE), Servers=12 (active=12 idle=0), Completed=2066, Blocked=11, Discarded=0
+Cycle 8300: Queue=583 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=1992, Blocked=8, Discarded=0
+[Cycle 8328] SCALE DOWN: queue=599 < lower threshold 600 (50 x 12) => servers: 12 -> 11
+Cycle 8350: Queue=605 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=10 idle=1), Completed=2077, Blocked=11, Discarded=0
+Cycle 8350: Queue=586 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=10 idle=1), Completed=2000, Blocked=8, Discarded=0
+Cycle 8400: Queue=600 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2090, Blocked=11, Discarded=0
+Cycle 8400: Queue=586 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=10 idle=1), Completed=2010, Blocked=8, Discarded=0
+Cycle 8450: Queue=597 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2100, Blocked=11, Discarded=0
+Cycle 8450: Queue=581 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2022, Blocked=8, Discarded=0
+Cycle 8500: Queue=598 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2114, Blocked=11, Discarded=0
+Cycle 8500: Queue=582 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2030, Blocked=8, Discarded=0
+Cycle 8550: Queue=598 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2126, Blocked=11, Discarded=0
+Cycle 8550: Queue=585 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2038, Blocked=8, Discarded=0
+Cycle 8600: Queue=598 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=10 idle=1), Completed=2134, Blocked=11, Discarded=0
+Cycle 8600: Queue=585 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2048, Blocked=8, Discarded=0
+Cycle 8650: Queue=598 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2143, Blocked=11, Discarded=0
+Cycle 8650: Queue=586 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2060, Blocked=8, Discarded=0
+Cycle 8700: Queue=596 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2156, Blocked=11, Discarded=0
+Cycle 8700: Queue=588 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2068, Blocked=8, Discarded=0
+Cycle 8750: Queue=595 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2168, Blocked=11, Discarded=0
+Cycle 8750: Queue=593 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2077, Blocked=8, Discarded=0
+Cycle 8800: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2177, Blocked=11, Discarded=0
+Cycle 8800: Queue=594 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2088, Blocked=8, Discarded=0
+Cycle 8850: Queue=589 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=10 idle=1), Completed=2190, Blocked=11, Discarded=0
+Cycle 8850: Queue=599 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=9 idle=2), Completed=2099, Blocked=8, Discarded=0
+Cycle 8900: Queue=590 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=10 idle=1), Completed=2201, Blocked=11, Discarded=0
+Cycle 8900: Queue=589 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2109, Blocked=8, Discarded=0
+Cycle 8950: Queue=589 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2211, Blocked=11, Discarded=0
+Cycle 8950: Queue=589 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2118, Blocked=8, Discarded=0
+Cycle 9000: Queue=589 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2221, Blocked=11, Discarded=0
+Cycle 9000: Queue=589 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2130, Blocked=8, Discarded=0
+Cycle 9050: Queue=590 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2232, Blocked=11, Discarded=0
+Cycle 9050: Queue=589 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2139, Blocked=8, Discarded=0
+Cycle 9100: Queue=594 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=10 idle=1), Completed=2239, Blocked=11, Discarded=0
+Cycle 9100: Queue=585 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2155, Blocked=8, Discarded=0
+Cycle 9150: Queue=594 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2248, Blocked=11, Discarded=0
+Cycle 9150: Queue=590 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2161, Blocked=8, Discarded=0
+Cycle 9200: Queue=594 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=10 idle=1), Completed=2260, Blocked=11, Discarded=0
+Cycle 9200: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2171, Blocked=8, Discarded=0
+Cycle 9250: Queue=591 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2271, Blocked=11, Discarded=0
+Cycle 9250: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2179, Blocked=8, Discarded=0
+Cycle 9300: Queue=583 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2287, Blocked=11, Discarded=0
+Cycle 9300: Queue=597 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2185, Blocked=8, Discarded=0
+Cycle 9350: Queue=586 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2296, Blocked=11, Discarded=0
+Cycle 9350: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2200, Blocked=8, Discarded=0
+Cycle 9400: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=10 idle=1), Completed=2307, Blocked=11, Discarded=0
+Cycle 9400: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=8 idle=3), Completed=2212, Blocked=8, Discarded=0
+Cycle 9450: Queue=596 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2318, Blocked=12, Discarded=0
+Cycle 9450: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2219, Blocked=8, Discarded=0
+Cycle 9500: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2327, Blocked=12, Discarded=0
+Cycle 9500: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2230, Blocked=9, Discarded=0
+Cycle 9550: Queue=594 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2338, Blocked=12, Discarded=0
+Cycle 9550: Queue=590 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2242, Blocked=9, Discarded=0
+Cycle 9600: Queue=591 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2345, Blocked=13, Discarded=0
+Cycle 9600: Queue=594 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2252, Blocked=9, Discarded=0
+Cycle 9650: Queue=593 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2354, Blocked=13, Discarded=0
+Cycle 9650: Queue=594 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2262, Blocked=9, Discarded=0
+Cycle 9700: Queue=590 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2364, Blocked=13, Discarded=0
+Cycle 9700: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=10 idle=1), Completed=2272, Blocked=9, Discarded=0
+Cycle 9750: Queue=597 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2372, Blocked=13, Discarded=0
+Cycle 9750: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2281, Blocked=9, Discarded=0
+Cycle 9800: Queue=602 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2383, Blocked=13, Discarded=0
+Cycle 9800: Queue=590 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2290, Blocked=9, Discarded=0
+Cycle 9850: Queue=592 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2397, Blocked=13, Discarded=0
+Cycle 9850: Queue=583 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2304, Blocked=10, Discarded=0
+Cycle 9900: Queue=591 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2407, Blocked=13, Discarded=0
+Cycle 9900: Queue=586 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2310, Blocked=10, Discarded=0
+Cycle 9950: Queue=593 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2418, Blocked=13, Discarded=0
+Cycle 9950: Queue=587 [target 550-880, cap=1100] (IN RANGE), Servers=11 (active=11 idle=0), Completed=2322, Blocked=10, Discarded=0
+
+========== Switch (Bonus) – Summary ==========
+Two load balancers run concurrently: Streaming (S) and Processing (P).
+
+--- Streaming Load Balancer ---
+
+=== Load Balancer Simulation Summary ===
+Starting queue size: 1003
+Ending queue size:   592
+Total requests generated:  3028
+Total requests completed:  2425
+Total requests blocked (firewall): 13
+Total requests discarded (queue full, cap=1100): 0
+Max queue size observed:   1003
+Min server count: 10
+Max server count: 13
+Final server count: 11
+Task time range: [5, 100]
+========================================
+
+--- Processing Load Balancer ---
+
+=== Load Balancer Simulation Summary ===
+Starting queue size: 986
+Ending queue size:   588
+Total requests generated:  2932
+Total requests completed:  2333
+Total requests blocked (firewall): 10
+Total requests discarded (queue full, cap=1100): 0
+Max queue size observed:   986
+Min server count: 10
+Max server count: 13
+Final server count: 11
+Task time range: [5, 100]
+========================================
+
+========== End Switch Summary ==========
