@@ -22,6 +22,159 @@
 #include "Switch.h"
 #include "Request.h"
 
+// ---------------------------------------------------------------------------
+// HTML log generation helpers
+// ---------------------------------------------------------------------------
+
+static std::string htmlEscape(const std::string &s)
+{
+    std::string out;
+    out.reserve(s.size());
+    for (char c : s)
+    {
+        if      (c == '&') out += "&amp;";
+        else if (c == '<') out += "&lt;";
+        else if (c == '>') out += "&gt;";
+        else               out += c;
+    }
+    return out;
+}
+
+static bool strHas(const std::string &s, const std::string &sub)
+{
+    return s.find(sub) != std::string::npos;
+}
+
+static bool strStartsWith(const std::string &s, const std::string &prefix)
+{
+    return s.rfind(prefix, 0) == 0;
+}
+
+/**
+ * @brief Colorize the "Server states:" line inline, giving each server token
+ *        its own color (ACTIVE = green, INACTIVE(cd) = orange, INACTIVE = gray).
+ */
+static std::string colorizeServerStates(const std::string &escaped)
+{
+    std::string out;
+    const std::string prefix = "  Server states:";
+    out += "<span class=\"srv-label\">" + prefix + "</span>";
+    size_t pos = prefix.size();
+
+    while (pos < escaped.size())
+    {
+        size_t open = escaped.find('[', pos);
+        if (open == std::string::npos)
+        {
+            out += "<span class=\"inactive\">" + escaped.substr(pos) + "</span>";
+            break;
+        }
+        out += "<span class=\"inactive\">" + escaped.substr(pos, open - pos) + "</span>";
+
+        size_t close = escaped.find(']', open);
+        if (close == std::string::npos)
+        {
+            out += escaped.substr(open);
+            break;
+        }
+
+        std::string token = escaped.substr(open, close - open + 1);
+        std::string cls;
+        if (strHas(token, ":ACTIVE"))           cls = "srv-active";
+        else if (strHas(token, "cd:"))          cls = "srv-cooling";
+        else                                    cls = "inactive";
+
+        out += "<span class=\"" + cls + "\">" + token + "</span>";
+        pos = close + 1;
+    }
+    return out;
+}
+
+/**
+ * @brief Read the plain-text log at srcPath and write a colored HTML version
+ *        to dstPath.  Opens in any browser with a dark VS-Code-style theme.
+ *
+ * @param srcPath Path to the source .txt log file.
+ * @param dstPath Path for the generated .html file.
+ */
+static void generateHtmlLog(const std::string &srcPath, const std::string &dstPath)
+{
+    std::ifstream in(srcPath);
+    if (!in.is_open()) return;
+    std::ofstream out(dstPath);
+    if (!out.is_open()) return;
+
+    out << R"(<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Load Balancer Log</title>
+  <style>
+    body        { background:#1e1e1e; color:#d4d4d4; font-family:'Consolas','Courier New',monospace; font-size:13px; padding:24px; line-height:1.6; }
+    pre         { margin:0; white-space:pre-wrap; word-break:break-all; }
+    .log-hdr    { color:#9cdcfe; }
+    .scale-up   { color:#4ec94e; font-weight:bold; }
+    .scale-down { color:#ff8c00; font-weight:bold; }
+    .req-start  { color:#569cd6; }
+    .req-end    { color:#4ec9b0; }
+    .overload   { color:#f44747; }
+    .underload  { color:#dcdcaa; }
+    .in-range   { color:#4ec94e; }
+    .summary    { color:#c586c0; font-weight:bold; }
+    .req-hdr    { color:#c586c0; }
+    .srv-label  { color:#808080; }
+    .srv-active { color:#4ec94e; }
+    .srv-cooling{ color:#ff8c00; }
+    .inactive   { color:#606060; }
+  </style>
+</head>
+<body><pre>
+)";
+
+    std::string line;
+    while (std::getline(in, line))
+    {
+        std::string esc = htmlEscape(line);
+
+        if (strStartsWith(line, "  Server states:"))
+        {
+            out << colorizeServerStates(esc) << "\n";
+            continue;
+        }
+
+        std::string cls;
+        if      (strHas(line, "SCALE UP"))                                  cls = "scale-up";
+        else if (strHas(line, "SCALE DOWN"))                                cls = "scale-down";
+        else if (strHas(line, "REQUEST START"))                             cls = "req-start";
+        else if (strHas(line, "REQUEST END"))                               cls = "req-end";
+        else if (strStartsWith(line, "Cycle") && strHas(line, "OVERLOADED"))  cls = "overload";
+        else if (strStartsWith(line, "Cycle") && strHas(line, "UNDERLOADED")) cls = "underload";
+        else if (strStartsWith(line, "Cycle") && strHas(line, "IN RANGE"))    cls = "in-range";
+        else if (strHas(line, "===") || strHas(line, "---"))                cls = "summary";
+        else if (strHas(line, "Per-Request Event Log") ||
+                 strHas(line, "Format:") ||
+                 strStartsWith(line, "----"))                               cls = "req-hdr";
+        else if (strStartsWith(line, "CSCE 412")  ||
+                 strStartsWith(line, "Mode:")      ||
+                 strStartsWith(line, "Initial")    ||
+                 strStartsWith(line, "Total cycle")||
+                 strStartsWith(line, "Task time")  ||
+                 strStartsWith(line, "Request arr")||
+                 strStartsWith(line, "Adjust cool")||
+                 strStartsWith(line, "Server cool")||
+                 strStartsWith(line, "Starting"))                           cls = "log-hdr";
+
+        if (!cls.empty())
+            out << "<span class=\"" << cls << "\">" << esc << "</span>\n";
+        else
+            out << esc << "\n";
+    }
+
+    out << "</pre></body></html>\n";
+}
+
+// ---------------------------------------------------------------------------
+
 /**
  * @brief Simple helper to read an integer from std::cin with a default value.
  *
@@ -146,7 +299,11 @@ int main()
 
     if (useFileLog)
     {
-        std::cout << "Log written to " << logFilePath << "\n";
+        logFile.close();
+        std::string htmlPath = logFilePath.substr(0, logFilePath.size() - 4) + ".html";
+        generateHtmlLog(logFilePath, htmlPath);
+        std::cout << "Log written to      " << logFilePath << "\n";
+        std::cout << "Colored HTML log:   " << htmlPath << "\n";
     }
     else
     {
