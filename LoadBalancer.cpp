@@ -138,6 +138,12 @@ void LoadBalancer::recordStartingState()
     }
 }
 
+void LoadBalancer::logFinalState(std::ostream &log)
+{
+    endingQueueSize_ = static_cast<int>(requestQueue_.size());
+    logCycle(log);
+}
+
 void LoadBalancer::printSummary(std::ostream &out) const
 {
     out << "\n=== Load Balancer Simulation Summary ===\n";

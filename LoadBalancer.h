@@ -77,6 +77,13 @@ public:
     void recordStartingState();
 
     /**
+     * @brief Log the current state as the final cycle entry (for use when driven by a Switch).
+     *
+     * @param log Output stream for logging.
+     */
+    void logFinalState(std::ostream &log);
+
+    /**
      * @brief Print a summary of the simulation to the given stream.
      *
      * @param out Output stream where the summary will be written.

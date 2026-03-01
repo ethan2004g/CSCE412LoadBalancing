@@ -82,8 +82,8 @@ void Switch::runSimulation(std::ostream &log)
         processingLB_.runOneCycle(log, false);
     }
 
-    // Ensure ending queue sizes are recorded (runOneCycle sets them when cycle hits total)
-    // They are updated in the last runOneCycle for each LB.
+    streamingLB_.logFinalState(log);
+    processingLB_.logFinalState(log);
 }
 
 void Switch::printSummary(std::ostream &out) const
