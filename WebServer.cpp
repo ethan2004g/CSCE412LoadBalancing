@@ -5,14 +5,21 @@
 
 #include "WebServer.h"
 
-WebServer::WebServer(int id)
-    : id_(id), idle_(true), currentRequest_(), completedCount_(0), justCompleted_(false), justAssigned_(false)
+WebServer::WebServer(int id, int cooldownCycles)
+    : id_(id), idle_(true), currentRequest_(), completedCount_(0),
+      justCompleted_(false), justAssigned_(false),
+      cooldownCycles_(cooldownCycles), cooldownRemaining_(0)
 {
 }
 
 bool WebServer::isIdle() const
 {
     return idle_;
+}
+
+bool WebServer::isAvailable() const
+{
+    return idle_ && cooldownRemaining_ == 0;
 }
 
 void WebServer::assignRequest(const Request &request)
@@ -28,6 +35,10 @@ void WebServer::tick()
     if (idle_)
     {
         justCompleted_ = false;
+        if (cooldownRemaining_ > 0)
+        {
+            --cooldownRemaining_;
+        }
         return;
     }
 
@@ -50,6 +61,7 @@ void WebServer::tick()
         idle_ = true;
         ++completedCount_;
         justCompleted_ = true;
+        cooldownRemaining_ = cooldownCycles_;
     }
     else
     {
@@ -80,5 +92,10 @@ void WebServer::clearJustCompleted()
 const Request &WebServer::getCurrentRequest() const
 {
     return currentRequest_;
+}
+
+int WebServer::getCooldownRemaining() const
+{
+    return cooldownRemaining_;
 }
 

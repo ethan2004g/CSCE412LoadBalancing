@@ -112,7 +112,8 @@ int main()
     logStream << "Total cycles: " << totalCycles << "\n";
     logStream << "Task time range: [" << config.minTaskTime << ", " << config.maxTaskTime << "]\n";
     logStream << "Request arrival probability: " << config.requestArrivalProbability << "\n";
-    logStream << "Adjust cooldown cycles: " << config.adjustCooldownCycles << "\n\n";
+    logStream << "Adjust cooldown cycles: " << config.adjustCooldownCycles << "\n";
+    logStream << "Server cooldown after request: " << config.serverCooldownCycles << " cycles\n\n";
 
     if (useBonusSwitch)
     {

@@ -41,7 +41,7 @@ LoadBalancer::LoadBalancer(int initialServers, int totalCycles, const Simulation
 
     for (int i = 0; i < initialServers; ++i)
     {
-        servers_.emplace_back(i);
+        servers_.emplace_back(i, config.serverCooldownCycles);
     }
 }
 
@@ -158,6 +158,7 @@ void LoadBalancer::printSummary(std::ostream &out) const
     out << "Max server count: " << maxServerCount_ << "\n";
     out << "Final server count: " << servers_.size() << "\n";
     out << "Task time range: [" << config_.minTaskTime << ", " << config_.maxTaskTime << "]\n";
+    out << "Server cooldown after request: " << config_.serverCooldownCycles << " cycles\n";
     out << "========================================\n";
 }
 
@@ -202,7 +203,7 @@ void LoadBalancer::assignRequestsToServers()
 {
     for (auto &server : servers_)
     {
-        if (server.isIdle() && !requestQueue_.empty())
+        if (server.isAvailable() && !requestQueue_.empty())
         {
             Request r = requestQueue_.front();
             requestQueue_.pop();
@@ -261,7 +262,7 @@ void LoadBalancer::adjustServersIfNeeded(std::ostream &log)
     if (queueSize > upperThreshold)
     {
         int newId = serverCount;
-        servers_.emplace_back(newId);
+        servers_.emplace_back(newId, config_.serverCooldownCycles);
         lastAdjustCycle_ = currentCycle_;
 
         std::string msg = "[Cycle " + std::to_string(currentCycle_) +
@@ -311,19 +312,27 @@ void LoadBalancer::adjustServersIfNeeded(std::ostream &log)
 
 void LoadBalancer::logCycle(std::ostream &log) const
 {
-    int activeServers = 0;
-    int idleServers = 0;
+    int activeServers   = 0;
+    int coolingServers  = 0;
+    int idleServers     = 0;
+
     for (const auto &s : servers_)
     {
-        if (s.isIdle())
-        {
-            ++idleServers;
-        }
-        else
+        if (!s.isIdle())
         {
             ++activeServers;
         }
+        else if (s.getCooldownRemaining() > 0)
+        {
+            ++coolingServers;
+        }
+        else
+        {
+            ++idleServers;
+        }
     }
+
+    int inactiveServers = coolingServers + idleServers;
 
     int serverCount = static_cast<int>(servers_.size());
     int queueSize   = static_cast<int>(requestQueue_.size());
@@ -331,17 +340,38 @@ void LoadBalancer::logCycle(std::ostream &log) const
     int upperThresh = 80 * serverCount;
 
     const char *status = "IN RANGE";
-    if (queueSize > upperThresh)       status = "OVERLOADED";
-    else if (queueSize < lowerThresh)  status = "UNDERLOADED";
+    if (queueSize > upperThresh)      status = "OVERLOADED";
+    else if (queueSize < lowerThresh) status = "UNDERLOADED";
 
     log << "Cycle " << currentCycle_
         << ": Queue=" << queueSize
         << " [target " << lowerThresh << "-" << upperThresh << ", cap=" << maxQueueCapacity_ << "] (" << status << ")"
         << ", Servers=" << serverCount
-        << " (active=" << activeServers << " idle=" << idleServers << ")"
+        << " (active=" << activeServers << " inactive=" << inactiveServers << ")"
         << ", Completed=" << totalCompleted_
         << ", Blocked=" << totalBlocked_
         << ", Discarded=" << totalDiscarded_
         << "\n";
+
+    // Per-server status line
+    log << "  Server states:";
+    for (const auto &s : servers_)
+    {
+        log << " [S" << s.getId() << ":";
+        if (!s.isIdle())
+        {
+            log << "ACTIVE";
+        }
+        else if (s.getCooldownRemaining() > 0)
+        {
+            log << "INACTIVE(cd:" << s.getCooldownRemaining() << ")";
+        }
+        else
+        {
+            log << "INACTIVE";
+        }
+        log << "]";
+    }
+    log << "\n";
 }
 

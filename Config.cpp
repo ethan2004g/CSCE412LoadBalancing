@@ -69,6 +69,10 @@ bool loadConfigFromFile(const std::string &path, SimulationConfig &outConfig)
         {
             vs >> cfg.maxQueuePerServer;
         }
+        else if (key == "serverCooldownCycles")
+        {
+            vs >> cfg.serverCooldownCycles;
+        }
     }
 
     outConfig = cfg;

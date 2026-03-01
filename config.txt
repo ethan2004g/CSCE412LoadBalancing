@@ -10,4 +10,7 @@ adjustCooldownCycles=50
 blockedIpPrefix=10.
 # Max queue slots per server. New requests beyond this cap are discarded (dropped).
 maxQueuePerServer=110
+# Cycles a server must wait after completing a request before it can accept a new one.
+# Set to 0 to disable cooldown (default behavior).
+serverCooldownCycles=5
 

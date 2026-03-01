@@ -18,6 +18,7 @@ struct SimulationConfig
     int adjustCooldownCycles;      ///< Cooldown cycles between server scale actions.
     std::string blockedIpPrefix = "10.";      ///< IP prefix to block (firewall/DOS prevention).
     int maxQueuePerServer = 110;              ///< Max queue size per server before new requests are discarded.
+    int serverCooldownCycles = 0;             ///< Cycles a server must wait after completing a request before accepting a new one.
 };
 
 /**
@@ -28,6 +29,7 @@ struct SimulationConfig
  * - maxTaskTime
  * - requestArrivalProbability
  * - adjustCooldownCycles
+ * - serverCooldownCycles
  *
  * @param path Path to the configuration file.
  * @param outConfig Output parameter for the loaded configuration.

@@ -20,15 +20,28 @@ public:
      * @brief Construct a new WebServer.
      *
      * @param id Unique identifier for this server.
+     * @param cooldownCycles Number of cycles the server must wait after completing
+     *        a request before it can accept a new one. Defaults to 0 (no cooldown).
      */
-    explicit WebServer(int id);
+    explicit WebServer(int id, int cooldownCycles = 0);
 
     /**
-     * @brief Check whether this server is currently idle.
+     * @brief Check whether this server is currently idle (not processing a request).
+     *
+     * A server that is cooling down is considered idle but not yet available.
      *
      * @return true if there is no active request; false otherwise.
      */
     bool isIdle() const;
+
+    /**
+     * @brief Check whether this server is available to accept a new request.
+     *
+     * A server is available only when it is idle AND its cooldown has expired.
+     *
+     * @return true if the server can accept a new request; false otherwise.
+     */
+    bool isAvailable() const;
 
     /**
      * @brief Assign a new request to this server.
@@ -78,6 +91,13 @@ public:
      */
     const Request &getCurrentRequest() const;
 
+    /**
+     * @brief Get the number of cooldown cycles remaining after the last completed request.
+     *
+     * @return Cycles remaining; 0 means the cooldown has expired.
+     */
+    int getCooldownRemaining() const;
+
 private:
     int id_;
     bool idle_;
@@ -85,5 +105,7 @@ private:
     int completedCount_;
     bool justCompleted_;
     bool justAssigned_;
+    int cooldownCycles_;     ///< Configured cooldown duration.
+    int cooldownRemaining_;  ///< Cycles remaining in the current cooldown.
 };
 
